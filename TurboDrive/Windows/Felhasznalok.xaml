@@ -1,0 +1,49 @@
+﻿<Window x:Class="TurboDrive.Windows.Felhasznalok"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TurboDrive.Windows"
+        xmlns:viewModels="clr-namespace:TurboDrive.ViewModels"
+        mc:Ignorable="d"
+        Title="Felhasználók kezelése" Height="500" Width="800">
+
+    <Window.DataContext>
+        <viewModels:UserViewModel/>
+    </Window.DataContext>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Felhasználók DataGrid -->
+        <DataGrid x:Name="usersDataGrid"
+                  ItemsSource="{Binding Users}"
+                  SelectedItem="{Binding SelectedUser, Mode=TwoWay}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  Margin="0,0,0,10"
+                  SelectionMode="Single"
+                  AlternatingRowBackground="LightGray"
+                  Grid.Row="0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Felhasználónév" Binding="{Binding FelhasznaloNev}" Width="150"/>
+                <DataGridTextColumn Header="Teljes név" Binding="{Binding TeljesNev}" Width="150"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150"/>
+                <DataGridTextColumn Header="Jogosultság" Binding="{Binding Jogosultsag}" Width="100"/>
+                <DataGridTextColumn Header="Aktív" Binding="{Binding Aktiv}" Width="80"/>
+                <DataGridTextColumn Header="Regisztráció" Binding="{Binding RegisztracioDatuma, StringFormat=\{0:yyyy-MM-dd\}}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Műveleti Gombok -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" Margin="0,10,0,0">
+            <Button Content="Módosítás" Width="100" Margin="10,0" Click="Modositas"/>
+            <Button Content="Törlés" Width="100" Margin="10,0" Click="Torles"/>
+            <Button Content="Uj felhasznalo felvetele" Width="100" Margin="10,0" Click="UjFelhasznalo_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
